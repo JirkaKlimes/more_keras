@@ -2,7 +2,7 @@ from keras.layers import Layer, Conv2D, BatchNormalization, Activation
 
 
 class ConvBlock(Layer):
-    def __init__(self, n_features: int, activation: str, kernel_size: int = 3, padding: str = 'same', **kwargs):
+    def __init__(self, n_features: int, activation: str = 'silu', kernel_size: int = 3, padding: str = 'same', **kwargs):
         super().__init__(**kwargs)
         self.n_features = n_features
         self.activation = activation
@@ -17,7 +17,7 @@ class ConvBlock(Layer):
         return super().build(input_shape)
 
     def call(self, x):
-        x = self.conv1(x)
-        x = self.bn1(x)
-        x = self.act1(x)
+        x = self.conv(x)
+        x = self.bn(x)
+        x = self.act(x)
         return x
